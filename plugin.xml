@@ -32,7 +32,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <source-file src="src/ios/FirebaseAnalyticsPlugin.m" />
 
         <framework src="Firebase/Core" type="podspec" spec="~> 5.6"/>
-        <framework src="GoogleTagManager" type="podspec" spec="~> 6.0"/>
+        <framework src="GoogleTagManager" type="podspec" spec="~> 7.0"/>
     </platform>
 
     <platform name="android">
