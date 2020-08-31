@@ -45,7 +45,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             <config>
                 <source url="https://cdn.cocoapods.org/"/>
             </config>
-            <pods>
+            <pods use-frameworks="true">
                 <pod name="Firebase/Analytics" />
                 <pod name="GoogleTagManager" spec="7.1.4" />
             </pods>
