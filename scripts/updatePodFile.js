@@ -17,36 +17,43 @@ module.exports = async (context) => {
 }
 
 const updateFileString = async (filePath, targetText, replaceText) => {
-  console.log('Current Podfile path: ' + filePath)
-
-  const fileData = fs.readFileSync(filePath, 'utf8')
-
-  console.log('Current Podfile: ' + fileData)
-
-  if (fileData.indexOf(replaceText) > -1) {
-    console.log('File already updated. Skipping.')
+  // make sure the file exists
+  try {
+    fs.accessSync(filePath, fs.F_OK)
+  } catch (e) {
+    console.error(`Could not find file at ${filePath}`)
     return
   }
 
+  const fileData = fs.readFileSync(filePath, 'utf8')
+
+  if (fileData.indexOf(targetText) < 0) {
+    console.log(`${targetText} is missing from the file. Skipping.`)
+    return
+  }
+
+  if (fileData.indexOf(replaceText) > -1) {
+    console.log('File is already updated. Skipping.')
+    return
+  }
+
+  console.log(`Updating file with replace text: ${replaceText}`)
+
   const updatedText = fileData.replace(targetText, replaceText)
 
-  console.log('Update Podfile: ' + updatedText)
-
   fs.writeFileSync(filePath, updatedText)
+
+  console.log('File updated')
 }
 
 const podInstall = async (platformPath) => {
-  console.log('Current ios platform path: ' + platformPath)
+  console.log('Running pod install')
 
   const exec = util.promisify(require('child_process').exec)
 
   try {
-    const { stdout, stderr } = await exec('pod install', { cwd: platformPath })
-    console.log('Pod install response:' + stdout)
-
-    if (stderr) {
-      console.log('Pod install error:' + stderr)
-    }
+    const { stdout } = await exec('pod install', { cwd: platformPath })
+    console.log('Pod install response:\n' + stdout)
   } catch (err) {
     console.error('Pod install error')
     console.error(err)
