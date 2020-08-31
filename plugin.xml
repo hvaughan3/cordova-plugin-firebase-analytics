@@ -50,6 +50,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 <pod name="GoogleTagManager" spec="7.1.4" />
             </pods>
         </podspec>
+
+        <!-- The Google Tag Manager Plugin Currently requires update the Podfile to use dynamic linking (CocoaPods version 1.9.0+ required) -->
+        <hook src="scripts/updatePodFile.js" type="after_prepare" />
     </platform>
 
     <platform name="android">
