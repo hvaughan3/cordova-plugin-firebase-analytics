@@ -47,7 +47,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </config>
             <pods use-frameworks="true">
                 <pod name="Firebase/Analytics" />
-                <pod name="GoogleTagManager" spec="7.1.4" />
+                <pod name="GoogleTagManager" spec="7.2.0" />
             </pods>
         </podspec>
 
